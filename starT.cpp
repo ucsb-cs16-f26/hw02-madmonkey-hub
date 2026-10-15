@@ -14,7 +14,26 @@ void runTests(void);
 string starT(int width, int height)
 {
   string result = "";
-  result = "stub"; // TODO: remove this line, replace with correct code
+  //width is odd greater than or equal to 3
+  // height greater than or equal to 2
+  if((width%2==0)||(width<3)){return result;}
+  if(height<2){return result;}
+  //fill first row with *
+  for(int row=0;row<=width-1;row++)
+  {
+    result+="*";
+  }
+  result+="\n";
+  //fill middle column with *, other spaces are empty
+    for(int col=0;col<=height-2;col++)
+    {
+        for(int row=0;row<=width-1;row++)
+        {
+            if(row==((width+1)/2)-1) {result+="*";}
+            else result+=" ";
+        }
+        result+="\n";
+    }
   return result;
 }
 
@@ -79,15 +98,24 @@ int main(int argc, char *argv[])
 
   // TODO: Add check for parameters
   // and code to print usage message
-
+  if(argc != 3)
+  {
+	cerr << "Usage: " << argv[0] << " width height" << endl;
+    	exit(1);
+  }
   // TODO: Add code to get width and height from command line args
   // code that checks if they are both -1; if so, call runTests()
   // then exit.
-
-  runTests();
+  int width = stoi(argv[1]);
+  int height = stoi(argv[2]);
+  if (width == -1 && height == -1)
+  {
+    runTests();
+    exit(0);
+  }
 
   // TODO: Add code that calls the starT function and prints
   // the result on cout (without an extra newline)
-
+  cout << starT(width, height);
   return 0;
 }
